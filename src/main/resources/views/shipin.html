@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    html, body {
+        padding: 0;
+        margin: 0;
+    }
+    .playWnd {
+        margin: 30px 0 0 400px;
+        width: 1000px;                  /*播放容器的宽和高设定*/
+        height: 600px;
+        border: 1px solid red;
+    }
+    .operate {
+        margin-top: 24px;
+    }
+    .operate::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+    .module {
+        float: left;
+        width: 340px;
+        /*min-height: 320px;*/
+        margin-left: 16px;
+        padding: 16px 8px;
+        box-sizing: border-box;
+        border: 1px solid #e5e5e5;
+    }
+    .module .item {
+        margin-bottom: 4px;
+    }
+    .module input[type="text"] {
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 0;
+        width: 150px;
+        min-height: 20px;
+    }
+    .module .btn {
+        min-width: 80px;
+        min-height: 24px;
+        margin-top: 100px;
+        margin-left: 80px;
+    }
+</style>
+
+<body>
+<!--预览界面-->
+<div id="operate" class="operate">
+    <div class="module">
+        <div class="item"><span class="label">监控点编号：</span><input id="cameraIndexCode" type="text" value=""></div>
+        <div class="item" style="margin-top: 20px;margin-left: -20px;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button style="width:20px;padding:0;margin:0;" id="startPreview" class="btn">预览</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button style="width:90px;padding:0;margin:0;" id="stopAllPreview" class="btn">停止全部预览</button>
+        </div>
+    </div>
+</div>
+<!--视频窗口展示-->
+<div id="playWnd" class="playWnd" style="left: 109px; top: 133px;"></div>
+
+<script src="jquery.min.js"></script>
+<script src="preview.js"></script>
+<script src="shipin.js"></script>
+</body>
+</html>

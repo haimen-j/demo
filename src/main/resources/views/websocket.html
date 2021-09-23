@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocketDemo</title>
+</head>
+<body>
+<h2>Hello World!</h2>
+    <p>建立的连接号</p><input id="waa" type="text" />
+    <button onclick="bind_web()">建立websocket</button>
+    <hr />
+    <input id="text" type="text" />
+
+    <button onclick="send()">发送消息</button>
+    <hr />
+    <button onclick="closeWebSocket()">关闭WebSocket连接</button>
+    <hr />
+    <div>
+        <spen>接收到的消息</spen><input type="text" id="message"/>
+    </div>
+
+
+
+<script src="jquery.min.js"></script>
+    <script>
+        var url = "ws://localhost:8081";
+
+        var websocket = null;
+            function bind_web() {
+                var num = $("#waa").val();
+                websocket = new WebSocket(url+"/websocket/"+num);
+            if (typeof websocket == "undefined"){
+                alert("该浏览器不支持websocket!");
+            }
+
+            websocket.onopen = function () {
+                console.log("socket已打开");
+            }
+            websocket.onmessage = function (ev) {
+                $("#message").val(ev.data);
+                var s = JSON.parse(ev.data);
+                console.log(s.info);
+                console.log(ev.data);
+            }
+            websocket.onclose =function (ev) {
+                console.log("socket关闭！")
+            }
+            websocket.onerror = function (ev) {
+                console.log("socket发生错误");
+            }
+
+        }
+
+        //发送消息
+        function send() {
+            var meg = $("#text").val();
+            // websocket.send(meg);
+            $.ajax({
+                type: "GET",
+                url: "/WebSoketDemo/sendMsg",
+                contentType: 'application/json',
+                data:{
+                    id:$("#waa").val(),
+                    msg:meg
+                },
+                success:function () {
+                },
+                error:function (data) {
+                }
+            })
+        }
+
+        //关闭socket连接
+        function closeWebSocket(){
+            websocket.close();
+        }
+    </script>
+</body>
+</html>
